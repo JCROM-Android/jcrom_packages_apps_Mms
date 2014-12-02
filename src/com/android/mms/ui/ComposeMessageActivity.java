@@ -231,6 +231,8 @@ public class ComposeMessageActivity extends Activity
 
     private static final String EXIT_ECM_RESULT = "exit_ecm_result";
 
+    private static final String VOICE_CAPABLE_PROPERTY = "persist.sys.voice.capable";
+
     // When the conversation has a lot of messages and a new message is sent, the list is scrolled
     // so the user sees the just sent message. If we have to scroll the list more than 20 items,
     // then a scroll shortcut is invoked to move the list near the end before scrolling.
@@ -2648,7 +2650,8 @@ public class ComposeMessageActivity extends Activity
 
         // Don't show the call icon if the device don't support voice calling.
         boolean voiceCapable =
-                getResources().getBoolean(com.android.internal.R.bool.config_voice_capable);
+                //getResources().getBoolean(com.android.internal.R.bool.config_voice_capable);
+                SystemProperties.getBoolean(VOICE_CAPABLE_PROPERTY, true);
         if (isRecipientCallable() && voiceCapable) {
             MenuItem item = menu.add(0, MENU_CALL_RECIPIENT, 0, R.string.menu_call)
                 .setIcon(R.drawable.ic_menu_call)
